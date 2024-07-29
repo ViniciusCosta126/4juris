@@ -22,8 +22,7 @@ class CreateNewUser implements CreatesNewUsers
         $validator = Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => $this->passwordRules(),
-            'empresa_id' => ['required', 'exists:empresas,id'],
+            'password' => $this->passwordRules()
         ]);
 
         if ($validator->fails()) {
@@ -33,8 +32,7 @@ class CreateNewUser implements CreatesNewUsers
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
-            'password' => Hash::make($input['password']),
-            'empresa_id' => $input['empresa_id'],
+            'password' => Hash::make($input['password'])
         ]);
         return response()->json($user, 201);
     }

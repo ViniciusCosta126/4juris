@@ -18,6 +18,7 @@ class UserController extends Controller
 
     public function store(Request $request): JsonResponse
     {
+
         $result = $this->createNewUser->create($request->all());
 
         if ($result instanceof \Illuminate\Support\MessageBag) {
@@ -25,5 +26,12 @@ class UserController extends Controller
         }
 
         return response()->json(['user' => $result], 201);
+    }
+    public function update(Request $request, User $user)
+    {
+
+        $user->fill($request->all());
+        $user->save();
+        return response()->json($user, 200);
     }
 }
