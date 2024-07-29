@@ -11,7 +11,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/register', [UserController::class, 'store']);
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('empresas', EmpresaController::class);
     Route::apiResource('cliente', ClienteController::class);
